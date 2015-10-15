@@ -1,0 +1,27 @@
+{% trans_default_domain 'flashbag' %}
+
+{% if app.session.flashBag.has('success') %}
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <ul>
+            {% for success in app.session.flashBag.get('success') %}
+                <li>{{ success|trans }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+{% if app.session.flashBag.has('error') %}
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <ul>
+            {% for error in app.session.flashBag.get('error') %}
+                <li>{{ error|trans }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

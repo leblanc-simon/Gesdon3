@@ -1,0 +1,9 @@
+new:
+    donation: Nouveau don
+
+edit:
+    donation: Modification du don "%name%"
+
+delete:
+    donation: Suppression du don "%name%"
+    donation_explain: Êtes-vous sûr de vouloir supprimer le don "%name%" d'un montant de %amount% € ?

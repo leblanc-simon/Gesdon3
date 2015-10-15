@@ -1,0 +1,20 @@
+services:
+    form.type.address:
+        class: AppBundle\Form\AddressType
+        tags:
+            - { name: form.type, alias: address }
+
+    form.type.contributor:
+        class: AppBundle\Form\ContributorType
+        tags:
+            - { name: form.type, alias: contributor }
+
+    form.type.donation:
+        class: AppBundle\Form\DonationType
+        tags:
+            - { name: form.type, alias: donation }
+
+    form.type.donation.delete:
+        class: AppBundle\Form\DonationDeleteType
+        tags:
+            - { name: form.type, alias: donation_delete }

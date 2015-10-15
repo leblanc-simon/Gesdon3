@@ -1,0 +1,28 @@
+contributor:
+    firstname: Prénom
+    lastname: Nom
+    company: Société
+    email: Adresse e-mail
+    single_address: Adresse fiscale
+
+address:
+    street: Rue
+    additional: Complément
+    zip_code: Code postal
+    city: Ville
+    country: Pays
+
+donation:
+    title: Don
+    contributor: Donateur
+    uuid: Identifiant de la transaction
+    amount: Montant
+    via: Interface de paiement
+    fee: Frais
+    created_at: Date du don
+
+button:
+    save: Enregistrer
+    delete: Supprimer
+    return:
+        list: Retour à la liste

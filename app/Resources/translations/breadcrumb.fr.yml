@@ -1,0 +1,7 @@
+homepage: Accueil
+
+donation:
+    list: Dons
+    edit: Édition
+    add: Nouveau
+    delete: Suppression

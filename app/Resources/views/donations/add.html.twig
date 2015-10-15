@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'edit' %}
+
+{% block body %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('homepage') }}">{{ 'homepage'|trans({}, 'breadcrumb') }}</a></li>
+        <li><a href="{{ path('donations') }}">{{ 'donation.list'|trans({}, 'breadcrumb') }}</a></li>
+        <li class="active">{{ 'donation.add'|trans({}, 'breadcrumb') }}</li>
+    </ol>
+
+    <h1>{{ 'new.donation'|trans }}</h1>
+
+    {% include 'donations/_form.html.twig' %}
+{% endblock %}

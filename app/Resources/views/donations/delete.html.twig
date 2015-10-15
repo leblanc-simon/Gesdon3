@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'edit' %}
+
+{% block body %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('homepage') }}">{{ 'homepage'|trans({}, 'breadcrumb') }}</a></li>
+        <li><a href="{{ path('donations') }}">{{ 'donation.list'|trans({}, 'breadcrumb') }}</a></li>
+        <li class="active">{{ 'donation.delete'|trans({}, 'breadcrumb') }}</li>
+    </ol>
+
+    <h1>{{ 'delete.donation'|trans({'%name%': donation.uuid}) }}</h1>
+
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-danger">
+                {{ 'delete.donation_explain'|trans({'%name%': donation.uuid, '%amount%': donation.amount}) }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <a href="{{ path('donations') }}" class="btn btn-success">
+                {{ 'button.return.list'|trans({}, 'form') }}
+            </a>
+            {{ form_widget(form) }}
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

@@ -1,0 +1,17 @@
+{{ form_start(form) }}
+{% set address = form_row(form.contributor.single_address) %}
+{% set contributor = form_row(form.contributor) %}
+<div class="row">
+    <div class="col-md-6 col-xs-12">
+        {{ contributor|raw }}
+    </div>
+    <div class="col-md-6 col-xs-12">
+        {{ address|raw }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        {{ form_row(form) }}
+    </div>
+</div>
+{{ form_end(form) }}

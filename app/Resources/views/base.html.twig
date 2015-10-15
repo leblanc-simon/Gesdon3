@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="{{ locale }}">
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Gesdon{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% stylesheets 'css/bootstrap.min.css' filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        <div class="container-fluid">
+            {% include "_components/header.html.twig" %}
+            {% include "_components/flashbag.html.twig" %}
+            {% block body %}{% endblock %}
+        </div>
+        <script>
+            var replace_parameter = '__parameter__';
+            var urls = {
+                api: {
+                    contributor: {
+                        get_by_email: '{{ path('api_contributor_by_email', {'email': '__parameter__'})|escape('js') }}',
+                        last_address_by_email: '{{ path('api_contributor_last_address_by_email', {'email': '__parameter__'})|escape('js') }}'
+                    }
+                }
+            };
+        </script>
+        {% javascripts
+            'js/jquery-2.1.4.min.js'
+            'js/bootstrap.min.js'
+            'js/app.js'
+        %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

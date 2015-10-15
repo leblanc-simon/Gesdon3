@@ -1,0 +1,9 @@
+services:
+    manager.donation:
+        class: AppBundle\Manager\Donation
+        arguments:
+            - @doctrine.orm.entity_manager
+            - @repository.donation
+            - @repository.contributor
+            - @repository.address
+            - @session.flash_bag

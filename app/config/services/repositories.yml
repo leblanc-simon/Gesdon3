@@ -1,0 +1,28 @@
+services:
+    repository.address:
+        class: AppBundle\Repository\AddressRepository
+        public: true
+        factory_service: doctrine
+        factory_method: getRepository
+        arguments: [ AppBundle:Address ]
+
+    repository.contributor:
+        class: AppBundle\Repository\ContributorRepository
+        public: true
+        factory_service: doctrine
+        factory_method: getRepository
+        arguments: [ AppBundle:Contributor ]
+
+    repository.donation:
+        class: AppBundle\Repository\DonationRepository
+        public: true
+        factory_service: doctrine
+        factory_method: getRepository
+        arguments: [ AppBundle:Donation ]
+
+    repository.receipt:
+        class: Doctrine\ORM\EntityRepository
+        public: true
+        factory_service: doctrine
+        factory_method: getRepository
+        arguments: [ AppBundle:Receipt ]

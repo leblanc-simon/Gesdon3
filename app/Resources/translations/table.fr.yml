@@ -1,0 +1,26 @@
+contributor:
+    firstname: Prénom
+    lastname: Nom
+    company: Société
+    email: Adresse e-mail
+
+address:
+    street: Rue
+    additional: Complément
+    zip_code: Code postal
+    city: Ville
+    country: Pays
+
+donation:
+    uuid: Identifiant
+    contributor: Donateur
+    amount: Montant
+    via: Interface de paiement
+    fee: Frais
+    created_at: Date du don
+    title: Dons
+    add: Ajouter un don
+
+error:
+    donation:
+        empty: Aucun don actuellement
