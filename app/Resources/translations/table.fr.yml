@@ -1,4 +1,5 @@
 contributor:
+    title: Donateurs
     firstname: Prénom
     lastname: Nom
     company: Société
@@ -24,3 +25,5 @@ donation:
 error:
     donation:
         empty: Aucun don actuellement
+    contributor:
+        empty: Aucun contributeur actuellement

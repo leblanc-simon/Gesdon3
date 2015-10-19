@@ -5,3 +5,7 @@ donation:
     edit: Édition
     add: Nouveau
     delete: Suppression
+
+contributor:
+    list: Donateurs
+    show: Détail

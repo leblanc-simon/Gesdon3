@@ -1,0 +1,12 @@
+contributor:
+    title: Donateur : %name%
+    firstname: Prénom
+    lastname: Nom
+    company: Société
+    email: Adresse e-mail
+    total_amount: Montant total
+
+tab:
+    contributor: Donateur
+    donation: Dons
+    receipt: Reçus fiscaux

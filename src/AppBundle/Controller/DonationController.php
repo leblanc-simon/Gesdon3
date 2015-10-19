@@ -7,21 +7,28 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class DonationController
+ * @package AppBundle\Controller
+ * @Route("/donations")
+ */
 class DonationController extends Controller
 {
     /**
-     * @Route("/donations", name="donations")
+     * @Route("/", name="donations")
      */
     public function indexAction()
     {
-        $donations = $this->get('repository.donation')->findAll();
+        $donations = $this->get('repository.donation')->findBy([], [
+            'created_at' => 'DESC',
+        ]);
         return $this->render('donations/index.html.twig', [
             'donations' => $donations
         ]);
     }
 
     /**
-     * @Route("/donations/add", name="donations_add")
+     * @Route("/add", name="donations_add")
      */
     public function addAction(Request $request)
     {
@@ -29,7 +36,7 @@ class DonationController extends Controller
     }
 
     /**
-     * @Route("/donations/edit/{id}", name="donations_edit")
+     * @Route("/edit/{id}", name="donations_edit")
      */
     public function editAction(Donation $donation, Request $request)
     {
@@ -68,7 +75,7 @@ class DonationController extends Controller
     }
 
     /**
-     * @Route("/donations/delete/{id}", name="donations_delete")
+     * @Route("/delete/{id}", name="donations_delete")
      */
     public function deleteAction(Donation $donation, Request $request)
     {

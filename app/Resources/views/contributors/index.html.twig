@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'table' %}
+
+{% block body %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('homepage') }}">{{ 'homepage'|trans({}, 'breadcrumb') }}</a></li>
+        <li class="active">{{ 'contributor.list'|trans({}, 'breadcrumb') }}</li>
+    </ol>
+
+    <h1>{{ 'contributor.title'|trans }}</h1>
+
+    <div class="row">
+        <div class="col-md-12">
+            {% if contributors|length > 0 %}
+            <table class="table table-bordered table-responsive">
+                <thead>
+                    <tr>
+                        <th>{{ 'contributor.lastname'|trans }}</th>
+                        <th>{{ 'contributor.firstname'|trans }}</th>
+                        <th>{{ 'contributor.email'|trans }}</th>
+                        <th>{{ 'contributor.company'|trans }}</th>
+                        <th>{{ 'title'|trans({}, 'action') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for contributor in contributors %}
+                        <tr>
+                            <td>{{ contributor.lastname }}</td>
+                            <td>{{ contributor.firstname }}</td>
+                            <td>{{ contributor.email }}</td>
+                            <td>{{ contributor.company }}</td>
+                            <td>
+                                <a href="{{ path('contributor_show', {'id': contributor.id}) }}" class="btn btn-default">
+                                    <i class="glyphicon glyphicon-eye-open"></i>
+                                    {{ 'show'|trans({}, 'action') }}
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+                <div class="alert alert-warning">
+                    {{ 'error.contributor.empty'|trans }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

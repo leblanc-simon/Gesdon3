@@ -1,0 +1,121 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'show' %}
+
+{% block body %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('homepage') }}">{{ 'homepage'|trans({}, 'breadcrumb') }}</a></li>
+        <li><a href="{{ path('contributors') }}">{{ 'contributor.list'|trans({}, 'breadcrumb') }}</a></li>
+        <li class="active">{{ 'contributor.show'|trans({}, 'breadcrumb') }}</li>
+    </ol>
+
+    <h1>{{ 'contributor.title'|trans({'%name%': contributor}) }}</h1>
+
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="nav nav-tabs" role="tablist" id="tab-contributor">
+                <li role="presentation" class="active">
+                    <a href="#contributor" aria-controls="contributor" role="tab" data-toggle="tab">
+                        {{ 'tab.contributor'|trans }}
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a href="#donation" aria-controls="donation" role="tab" data-toggle="tab">
+                        {{ 'tab.donation'|trans }}
+                        <span class="badge">{{ contributor.donations.count }}</span>
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a href="#receipt" aria-controls="receipt" role="tab" data-toggle="tab">
+                        {{ 'tab.receipt'|trans }}
+                        <span class="badge"></span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="contributor">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="label label-info">{{ 'contributor.lastname'|trans }}</div>
+                            <div class="value">{{ contributor.lastname }}</div>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="label label-info">{{ 'contributor.firstname'|trans }}</div>
+                            <div class="value">{{ contributor.firstname }}</div>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="label label-info">{{ 'contributor.company'|trans }}</div>
+                            <div class="value">{{ contributor.company }}</div>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="label label-info">{{ 'contributor.email'|trans }}</div>
+                            <div class="value">{{ contributor.email }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="donation">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <table class="table table-responsive table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>{{ 'donation.uuid'|trans({}, 'table') }}</th>
+                                        <th>{{ 'donation.contributor'|trans({}, 'table') }}</th>
+                                        <th>{{ 'donation.amount'|trans({}, 'table') }}</th>
+                                        <th>{{ 'donation.fee'|trans({}, 'table') }}</th>
+                                        <th>{{ 'donation.via'|trans({}, 'table') }}</th>
+                                        <th>{{ 'donation.created_at'|trans({}, 'table') }}</th>
+                                        <th>{{ 'title'|trans({}, 'action') }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% set total_amount = 0 %}
+                                    {% for donation in contributor.donations %}
+                                        <tr>
+                                            <td>{{ donation.uuid }}</td>
+                                            <td>{{ donation.contributor }}</td>
+                                            <td>{{ donation.amount }}</td>
+                                            <td>{{ donation.fee }}</td>
+                                            <td>{{ donation.via }}</td>
+                                            <td>{{ donation.createdAt|date }}</td>
+                                            <td>
+                                                <a href="{{ path('donations_edit', {'id': donation.id}) }}" class="btn btn-warning">
+                                                    <i class="glyphicon glyphicon-edit"></i>
+                                                    {{ 'edit'|trans({}, 'action') }}
+                                                </a>
+                                                <a href="{{ path('donations_delete', {'id': donation.id}) }}" class="btn btn-danger">
+                                                    <i class="glyphicon glyphicon-remove"></i>
+                                                    {{ 'delete'|trans({}, 'action') }}
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        {% set total_amount = total_amount + donation.amount %}
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="2">{{ 'contributor.total_amount'|trans }}</th>
+                                        <th>{{ total_amount }}</th>
+                                        <th colspan="4"></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="receipt"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+    $(document).on('ready', function () {
+        $('#tab-contributor a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+    });
+    </script>
+{% endblock %}
