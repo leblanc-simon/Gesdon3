@@ -11,7 +11,10 @@
 
     <div class="row">
         <div class="col-md-12">
-            <a href="{{ path('donations_add') }}" class="btn btn-primary">{{ 'add.donation'|trans({}, 'action') }}</a>
+            <a href="{{ path('donations_add') }}" class="btn btn-primary">
+                <i class="icon-plus"></i>
+                {{ 'add.donation'|trans({}, 'action') }}
+            </a>
         </div>
     </div>
 
@@ -35,17 +38,17 @@
                         <tr>
                             <td>{{ donation.uuid }}</td>
                             <td>{{ donation.contributor }}</td>
-                            <td>{{ donation.amount }}</td>
-                            <td>{{ donation.fee }}</td>
+                            <td>{{ donation.amount|localizedcurrency('EUR') }}</td>
+                            <td>{{ donation.fee|localizedcurrency('EUR') }}</td>
                             <td>{{ donation.via }}</td>
-                            <td>{{ donation.createdAt|date }}</td>
+                            <td>{{ donation.createdAt|localizeddate('medium', 'none', locale) }}</td>
                             <td>
                                 <a href="{{ path('donations_edit', {'id': donation.id}) }}" class="btn btn-warning">
-                                    <i class="glyphicon glyphicon-edit"></i>
+                                    <i class="icon-edit"></i>
                                     {{ 'edit'|trans({}, 'action') }}
                                 </a>
                                 <a href="{{ path('donations_delete', {'id': donation.id}) }}" class="btn btn-danger">
-                                    <i class="glyphicon glyphicon-remove"></i>
+                                    <i class="icon-trash"></i>
                                     {{ 'delete'|trans({}, 'action') }}
                                 </a>
                             </td>

@@ -27,6 +27,7 @@ class ContributorController extends Controller
             'email' => $contributor->getEmail(),
             'firstname' => $contributor->getFirstname(),
             'lastname' => $contributor->getLastname(),
+            'contributor_type' => $contributor->getContributorType()->getId(),
         ]);
     }
 

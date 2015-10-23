@@ -5,6 +5,7 @@
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
+        <i class="icon-info"></i>
         <ul>
             {% for success in app.session.flashBag.get('success') %}
                 <li>{{ success|trans }}</li>
@@ -18,6 +19,7 @@
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
+        <i class="icon-alert"></i>
         <ul>
             {% for error in app.session.flashBag.get('error') %}
                 <li>{{ error|trans }}</li>

@@ -3,6 +3,7 @@ contributor:
     lastname: Nom
     company: Société
     email: Adresse e-mail
+    contributor_type: Type
     single_address: Adresse fiscale
 
 address:
@@ -16,6 +17,7 @@ donation:
     title: Don
     contributor: Donateur
     uuid: Identifiant de la transaction
+    payment_type: Moyen de paiement
     amount: Montant
     via: Interface de paiement
     fee: Frais

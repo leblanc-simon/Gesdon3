@@ -6,6 +6,9 @@ contributor:
     email: Adresse e-mail
     total_amount: Montant total
 
+receipt:
+    period: Du %begin% au %end%
+
 tab:
     contributor: Donateur
     donation: Dons

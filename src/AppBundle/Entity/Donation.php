@@ -8,7 +8,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Donation
  * 
- * @ORM\Table(name="donation", uniqueConstraints={}, indexes={@ORM\Index(name="fk_donation_contributor1_idx", columns={"contributor_id"}), @ORM\Index(name="fk_donation_receipt1_idx", columns={"receipt_id"})})
+ * @ORM\Table(
+ *      name="donation",
+ *      indexes={
+ *          @ORM\Index(name="donation_created_at_idx", columns={"created_at"})
+ *      }
+ * )
  * @ORM\Entity(repositoryClass="AppBundle\Repository\DonationRepository")
  * @ORM\HasLifecycleCallbacks
  */
@@ -24,7 +29,8 @@ class Donation
 
     /**
      * @ORM\ManyToOne(inversedBy="donations", targetEntity="AppBundle\Entity\Contributor", cascade={"persist"})
-     * @ORM\JoinColumn(referencedColumnName="id", name="contributor_id")
+     * @ORM\JoinColumn(referencedColumnName="id", name="contributor_id", nullable=false)
+     * @Assert\NotNull()
      */
     protected $contributor;
 
@@ -54,7 +60,15 @@ class Donation
 
     /**
      * @var string
-     * @ORM\Column(length=45, type="string")
+     * @ORM\Column(length=45, type="string", nullable=true)
+     * @Assert\Length(max=45, min=0)
+     * @Assert\Type(type="string")
+     */
+    protected $reference;
+
+    /**
+     * @var string
+     * @ORM\Column(length=45, type="string", nullable=true)
      * @Assert\Length(max=45, min=0)
      * @Assert\NotBlank()
      * @Assert\Type(type="string")
@@ -91,6 +105,13 @@ class Donation
      * @Assert\DateTime()
      */
     protected $updated_at;
+
+    /**
+     * @ORM\ManyToOne(inversedBy="donations", targetEntity="AppBundle\Entity\PaymentType")
+     * @ORM\JoinColumn(referencedColumnName="id", name="payment_type_id", nullable=false)
+     * @Assert\NotNull()
+     */
+    protected $payment_type;
 
     /**
      * Constructor of the Donation class
@@ -154,6 +175,16 @@ class Donation
 
 
     /**
+     * Get the value of reference
+     * @return string
+     */
+    public function getReference()
+    {
+        return $this->reference;
+    }
+
+
+    /**
      * Get the value of via
      * @return string
      */
@@ -200,6 +231,16 @@ class Donation
     public function getUpdatedAt()
     {
         return $this->updated_at;
+    }
+
+
+    /**
+     * Get the value of payment_type
+     * @return PaymentType
+     */
+    public function getPaymentType()
+    {
+        return $this->payment_type;
     }
 
 
@@ -264,6 +305,18 @@ class Donation
 
 
     /**
+     * Set the value of reference
+     * @param string $reference
+     * @return self
+     */
+    public function setReference($reference)
+    {
+        $this->reference = $reference;
+        return $this;
+    }
+
+
+    /**
      * Set the value of via
      * @param string $via
      * @return self
@@ -319,6 +372,18 @@ class Donation
     public function setUpdatedAt($updated_at)
     {
         $this->updated_at = $updated_at;
+        return $this;
+    }
+
+
+    /**
+     * Set the value of payment_type
+     * @param PaymentType $payment_type
+     * @return self
+     */
+    public function setPaymentType(PaymentType $payment_type)
+    {
+        $this->payment_type = $payment_type;
         return $this;
     }
 

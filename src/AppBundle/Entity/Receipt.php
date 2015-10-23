@@ -10,7 +10,12 @@ use AppBundle\Entity\Donation;
 /**
  * Receipt
  * 
- * @ORM\Table(name="receipt", uniqueConstraints={@ORM\UniqueConstraint(name="legal_number_UNIQUE", columns={"legal_number"})}, indexes={})
+ * @ORM\Table(
+ *      name="receipt",
+ *      indexes={
+ *          @ORM\Index(name="receipt_created_at_idx", columns={"created_at"})
+ *      }
+ * )
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
@@ -20,6 +25,7 @@ class Receipt
      * @var int
      * @ORM\Id
      * @ORM\Column(type="integer", options={"unsigned"=true})
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
@@ -178,6 +184,13 @@ class Receipt
      * @Assert\DateTime()
      */
     protected $sended_at;
+
+    /**
+     * @ORM\ManyToOne(inversedBy="receipts", targetEntity="AppBundle\Entity\Contributor")
+     * @ORM\JoinColumn(referencedColumnName="id", name="contributor_id", nullable=false)
+     * @Assert\NotNull()
+     */
+    protected $contributor;
 
     /**
      * @var ArrayCollection
@@ -393,6 +406,16 @@ class Receipt
     public function getSendedAt()
     {
         return $this->sended_at;
+    }
+
+
+    /**
+     * Get the value of contributor
+     * @return Contributor
+     */
+    public function getContributor()
+    {
+        return $this->contributor;
     }
 
 
@@ -642,6 +665,18 @@ class Receipt
     public function setSendedAt(\DateTime $sended_at)
     {
         $this->sended_at = $sended_at;
+        return $this;
+    }
+
+
+    /**
+     * Set the value of contributor
+     * @param Contributor $contributor
+     * @return self
+     */
+    public function setContributor(Contributor $contributor)
+    {
+        $this->contributor = $contributor;
         return $this;
     }
 

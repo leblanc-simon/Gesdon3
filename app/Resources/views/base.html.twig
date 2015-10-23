@@ -4,7 +4,11 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Gesdon{% endblock %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        {% stylesheets 'css/bootstrap.min.css' filter='cssrewrite' %}
+        {% stylesheets filter='cssrewrite'
+            'css/bootstrap.min.css'
+            'css/gesdon.css'
+            'css/app.css'
+        %}
         <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />

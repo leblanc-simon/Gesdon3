@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Address
  * 
- * @ORM\Table(name="address", uniqueConstraints={}, indexes={@ORM\Index(name="fk_address_contributor_idx", columns={"contributor_id"})})
+ * @ORM\Table(name="address")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\AddressRepository")
  * @ORM\HasLifecycleCallbacks
  */
@@ -24,7 +24,8 @@ class Address
 
     /**
      * @ORM\ManyToOne(inversedBy="addresses", targetEntity="AppBundle\Entity\Contributor", cascade={"persist"})
-     * @ORM\JoinColumn(referencedColumnName="id", name="contributor_id")
+     * @ORM\JoinColumn(referencedColumnName="id", name="contributor_id", nullable=false)
+     * @Assert\NotNull()
      */
     protected $contributor;
 

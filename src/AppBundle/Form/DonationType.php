@@ -20,6 +20,9 @@ class DonationType extends AbstractType
             ->add('uuid', null, [
                 'label' => 'donation.uuid',
             ])
+            ->add('payment_type', null, [
+                'label' => 'donation.payment_type',
+            ])
             ->add('amount', 'money', [
                 'label' => 'donation.amount',
             ])

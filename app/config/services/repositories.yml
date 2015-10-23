@@ -6,6 +6,13 @@ services:
         factory_method: getRepository
         arguments: [ AppBundle:Address ]
 
+    repository.configuration:
+        class: AppBundle\Repository\ConfigurationRepository
+        public: false
+        factory_service: doctrine
+        factory_method: getRepository
+        arguments: [ AppBundle:Configuration ]
+
     repository.contributor:
         class: AppBundle\Repository\ContributorRepository
         public: true

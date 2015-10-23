@@ -27,6 +27,9 @@ class ContributorType extends AbstractType
             ->add('company', null, [
                 'label' => 'contributor.company',
             ])
+            ->add('contributor_type', null, [
+                'label' => 'contributor.contributor_type',
+            ])
             ->add('single_address', 'address', [
                 'label' => 'contributor.single_address',
             ])

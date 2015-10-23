@@ -1,0 +1,42 @@
+{% trans_default_domain 'show' %}
+<div class="row">
+    <div class="col-xs-12">
+        {% if contributor.receipts|length > 0 %}
+            <table class="table table-responsive table-bordered">
+                <thead>
+                    <tr>
+                        <th>{{ 'receipt.date'|trans({}, 'table') }}</th>
+                        <th>{{ 'receipt.amount'|trans({}, 'table') }}</th>
+                        <th>{{ 'receipt.period'|trans({}, 'table') }}</th>
+                        <th>{{ 'receipt.sended_at'|trans({}, 'table') }}</th>
+                        <th>{{ 'title'|trans({}, 'action') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for receipt in contributor.receipts %}
+                        <tr>
+                            <td>{{ receipt.createdAt|localizeddate('medium', 'none', locale) }}</td>
+                            <td>{{ receipt.amount|localizedcurrency('EUR') }}</td>
+                            <td>{{ 'receipt.period'|trans({
+                                    '%begin%': receipt.beginDate|localizeddate('medium', 'none', locale),
+                                    '%end%': receipt.endDate|localizeddate('medium', 'none', locale)
+                                }) }}</td>
+                            <td>{% if receipt.sendedAt is not null %}{{ receipt.sendedAt|localizeddate('medium', 'none', locale) }}{% endif %}</td>
+                            <td>
+                                <a href="" class="btn btn-success">
+                                    <i class="icon-file-pdf"></i>
+                                    {{ 'show'|trans({}, 'action') }}
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="alert alert-info">
+                <i class="icon-info"></i>
+                {{ 'error.receipt.empty'|trans({}, 'table') }}
+            </div>
+        {% endif %}
+    </div>
+</div>

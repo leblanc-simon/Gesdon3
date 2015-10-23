@@ -9,7 +9,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Contributor
  * 
- * @ORM\Table(name="contributor", indexes={})
+ * @ORM\Table(
+ *      name="contributor",
+ *      indexes={
+ *          @ORM\Index(name="contributor_firstname_idx", columns={"firstname"}),
+ *          @ORM\Index(name="contributor_lastname_idx", columns={"lastname"}),
+ *          @ORM\Index(name="contributor_company_idx", columns={"company"})
+ *      }
+ * )
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ContributorRepository")
  * @ORM\HasLifecycleCallbacks
  */
@@ -49,9 +56,9 @@ class Contributor
 
     /**
      * @var string
-     * @ORM\Column(length=255, unique=true, type="string")
+     * @ORM\Column(length=255, unique=true, type="string", nullable=true)
      * @Assert\Length(max=255, min=0)
-     * @Assert\NotBlank()
+     * @Assert\Email()
      * @Assert\Type(type="string")
      */
     protected $email;
@@ -71,14 +78,30 @@ class Contributor
     protected $updated_at;
 
     /**
+     * @ORM\ManyToOne(inversedBy="contributors", targetEntity="AppBundle\Entity\ContributorType")
+     * @ORM\JoinColumn(referencedColumnName="id", name="contributor_type_id", nullable=false)
+     * @Assert\NotNull()
+     */
+    protected $contributor_type;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(mappedBy="contributor", targetEntity="AppBundle\Entity\Receipt")
+     * @ORM\OrderBy({"created_at" = "DESC"})
+     */
+    protected $receipts;
+
+    /**
      * @var ArrayCollection
      * @ORM\OneToMany(mappedBy="contributor", targetEntity="AppBundle\Entity\Donation", cascade={"persist"})
+     * @ORM\OrderBy({"created_at" = "DESC"})
      */
     protected $donations;
 
     /**
      * @var ArrayCollection
      * @ORM\OneToMany(mappedBy="contributor", targetEntity="AppBundle\Entity\Address", cascade={"persist"})
+     * @ORM\OrderBy({"created_at" = "ASC"})
      */
     protected $addresses;
 
@@ -87,6 +110,7 @@ class Contributor
      */
     public function __construct()
     {
+        $this->receipts = new ArrayCollection();
         $this->donations = new ArrayCollection();
         $this->addresses = new ArrayCollection();
     }
@@ -168,6 +192,26 @@ class Contributor
     public function getUpdatedAt()
     {
         return $this->updated_at;
+    }
+
+
+    /**
+     * Get the value of contributor_type
+     * @return ContributorType
+     */
+    public function getContributorType()
+    {
+        return $this->contributor_type;
+    }
+
+
+    /**
+     * Get the value of receipts
+     * @return Receipt[]
+     */
+    public function getReceipts()
+    {
+        return $this->receipts;
     }
 
 
@@ -283,6 +327,60 @@ class Contributor
     public function setUpdatedAt($updated_at)
     {
         $this->updated_at = $updated_at;
+        return $this;
+    }
+
+
+    /**
+     * Set the value of contributor_type
+     * @param ContributorType $contributor_type
+     * @return self
+     */
+    public function setContributorType($contributor_type)
+    {
+        $this->contributor_type = $contributor_type;
+        return $this;
+    }
+
+
+    /**
+     * Set the value of receipts
+     * @param  ArrayCollection     $receipts
+     * @return self
+     */
+    public function setReceipts(ArrayCollection $receipts)
+    {
+        $this->receipts = $receipts;
+        return $this;
+    }
+
+
+    /**
+     * Add a Receipt into Contributor
+     * @param  Receipt     $receipt
+     * @return self
+     */
+    public function addReceipt(Receipt $receipt)
+    {
+        if ($this->receipts->contains($receipt) === false) {
+            $this->receipts->add($receipt);
+            $receipt->setContributor($this);
+        }
+        return $this;
+    }
+
+
+    /**
+     * Remove a Receipt into Contributor
+     * @param  Receipt     $receipt
+     * @return self
+     */
+    public function removeReceipt(Receipt $receipt)
+    {
+        if ($this->receipts->contains($receipt) === true) {
+            $this->receipts->removeElement($receipt);
+            $receipt->setContributor(null);
+        }
         return $this;
     }
 

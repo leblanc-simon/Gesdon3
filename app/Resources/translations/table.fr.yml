@@ -22,8 +22,16 @@ donation:
     title: Dons
     add: Ajouter un don
 
+receipt:
+    date: Date du reçu
+    amount: Montant
+    period: Période
+    sended_at: Envoyé le
+
 error:
     donation:
         empty: Aucun don actuellement
     contributor:
         empty: Aucun contributeur actuellement
+    receipt:
+        empty: Aucun reçu actuellement

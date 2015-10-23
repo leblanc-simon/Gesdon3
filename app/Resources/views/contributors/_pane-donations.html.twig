@@ -1,0 +1,49 @@
+{% trans_default_domain 'show' %}
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table table-responsive table-bordered">
+            <thead>
+                <tr>
+                    <th>{{ 'donation.uuid'|trans({}, 'table') }}</th>
+                    <th>{{ 'donation.contributor'|trans({}, 'table') }}</th>
+                    <th>{{ 'donation.amount'|trans({}, 'table') }}</th>
+                    <th>{{ 'donation.fee'|trans({}, 'table') }}</th>
+                    <th>{{ 'donation.via'|trans({}, 'table') }}</th>
+                    <th>{{ 'donation.created_at'|trans({}, 'table') }}</th>
+                    <th>{{ 'title'|trans({}, 'action') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% set total_amount = 0 %}
+                {% for donation in contributor.donations %}
+                    <tr>
+                        <td>{{ donation.uuid }}</td>
+                        <td>{{ donation.contributor }}</td>
+                        <td>{{ donation.amount|localizedcurrency('EUR') }}</td>
+                        <td>{{ donation.fee }}</td>
+                        <td>{{ donation.via }}</td>
+                        <td>{{ donation.createdAt|localizeddate('medium', 'none', locale) }}</td>
+                        <td>
+                            <a href="{{ path('donations_edit', {'id': donation.id}) }}" class="btn btn-warning">
+                                <i class="icon-edit"></i>
+                                {{ 'edit'|trans({}, 'action') }}
+                            </a>
+                            <a href="{{ path('donations_delete', {'id': donation.id}) }}" class="btn btn-danger">
+                                <i class="icon-trash"></i>
+                                {{ 'delete'|trans({}, 'action') }}
+                            </a>
+                        </td>
+                    </tr>
+                    {% set total_amount = total_amount + donation.amount %}
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="2">{{ 'contributor.total_amount'|trans }}</th>
+                    <th>{{ total_amount|localizedcurrency('EUR') }}</th>
+                    <th colspan="4"></th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
