@@ -7,3 +7,17 @@ services:
             - @repository.contributor
             - @repository.address
             - @session.flash_bag
+
+    manager.configuration:
+        class: AppBundle\Manager\Configuration
+        arguments:
+            - @doctrine.orm.entity_manager
+            - @repository.configuration
+
+    manager.receipt:
+        class: AppBundle\Manager\Receipt
+        arguments:
+            - @doctrine.orm.entity_manager
+            - @logger
+            - @repository.donation
+            - @manager.configuration

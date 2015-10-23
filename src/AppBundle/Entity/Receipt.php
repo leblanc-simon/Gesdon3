@@ -17,7 +17,6 @@ use AppBundle\Entity\Donation;
  *      }
  * )
  * @ORM\Entity
- * @ORM\HasLifecycleCallbacks
  */
 class Receipt
 {
@@ -720,18 +719,5 @@ class Receipt
             $donation->setReceipt(null);
         }
         return $this;
-    }
-
-
-    /**
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
-     */
-    public function updatedTimestamps()
-    {
-        $this->setUpdatedAt(new \DateTime());
-        if ($this->getCreatedAt() === null) {
-            $this->setCreatedAt(new \DateTime());
-        }
     }
 }
