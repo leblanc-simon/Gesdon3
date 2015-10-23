@@ -14,15 +14,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class ContributorController extends Controller
 {
     /**
-     * @Route("/", name="contributors")
+     * @Route("/{page}", name="contributors", defaults={"page" = 1})
      */
-    public function indexAction()
+    public function indexAction($page)
     {
-        $contributors = $this->get('repository.contributor')->findBy([], [
-            'lastname' => 'ASC',
-            'firstname' => 'ASC',
-            'company' => 'ASC',
-        ]);
+        $contributors = $this
+            ->get('paginator')
+            ->setCurrentPage($page)
+            ->setQuery($this->get('repository.contributor')->getQueryForAll())
+        ;
+
         return $this->render('contributors/index.html.twig', [
             'contributors' => $contributors
         ]);

@@ -1,4 +1,12 @@
+parameters:
+    max_items_per_page: 50
+
 imports:
     - { resource: services/forms.yml }
     - { resource: services/managers.yml }
     - { resource: services/repositories.yml }
+
+services:
+    paginator:
+        class: AppBundle\Tools\Paginator
+        arguments: ["@router", %max_items_per_page%]

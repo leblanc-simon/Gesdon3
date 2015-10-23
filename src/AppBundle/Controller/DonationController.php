@@ -15,13 +15,16 @@ use Symfony\Component\HttpFoundation\Request;
 class DonationController extends Controller
 {
     /**
-     * @Route("/", name="donations")
+     * @Route("/{page}", name="donations", defaults={"page" = 1})
      */
-    public function indexAction()
+    public function indexAction($page)
     {
-        $donations = $this->get('repository.donation')->findBy([], [
-            'created_at' => 'DESC',
-        ]);
+        $donations = $this
+            ->get('paginator')
+            ->setCurrentPage($page)
+            ->setQuery($this->get('repository.donation')->getQueryForAll())
+        ;
+
         return $this->render('donations/index.html.twig', [
             'donations' => $donations
         ]);

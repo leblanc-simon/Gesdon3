@@ -7,6 +7,17 @@ use Doctrine\ORM\EntityRepository;
 
 class ContributorRepository extends EntityRepository
 {
+    public function getQueryForAll()
+    {
+        return $this
+            ->createQueryBuilder('c')
+            ->addOrderBy('c.lastname', 'ASC')
+            ->addOrderBy('c.firstname', 'ASC')
+            ->addOrderBy('c.company', 'ASC')
+            ->getQuery()
+            ;
+    }
+
     /**
      * @param $firstname
      * @param $lastname

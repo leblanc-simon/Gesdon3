@@ -11,7 +11,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            {% if contributors|length > 0 %}
+            {% if contributors.valid %}
             <table class="table table-bordered table-responsive">
                 <thead>
                     <tr>
@@ -39,6 +39,7 @@
                     {% endfor %}
                 </tbody>
             </table>
+            {% include ':_components:paginator.html.twig' with {'paginator': contributors, 'route': 'contributors', 'route_parameter': []} only  %}
             {% else %}
                 <div class="alert alert-warning">
                     {{ 'error.contributor.empty'|trans }}

@@ -1,0 +1,26 @@
+{% if paginator.nbPages > 1 %}
+    <nav class="paginate">
+        <ul class="pagination">
+            <li{% if paginator.isFirstPage %} class="disabled"{% endif %}>
+                <a href="{{ paginator.getFirstRoute(route, route_parameter) }}">&lt;&lt;</a>
+            </li>
+            <li{% if paginator.isFirstPage %} class="disabled"{% endif %}>
+                <a href="{{ paginator.getPreviousRoute(route, route_parameter) }}">&lt;</a>
+            </li>
+
+            {#display p numbers only from p-3 to p+3 but don't go <1 or >pages_count#}
+            {% for p in range(max(paginator.currentPage - 3, 1), min(paginator.currentPage + 3, paginator.nbPages)) %}
+                <li{% if p == paginator.currentPage %} class="active"{% endif %}>
+                    <a href="{{ paginator.getRoute(p, route, route_parameter) }}">{{ p }}</a>
+                </li>
+            {% endfor %}
+
+            <li{% if paginator.isLastPage %} class="disabled"{% endif %}>
+                <a href="{{ paginator.getNextRoute(route, route_parameter) }}">&gt;</a>
+            </li>
+            <li{% if paginator.isLastPage %} class="disabled"{% endif %}>
+                <a href="{{ paginator.getLastRoute(route, route_parameter) }}">&gt;&gt;</a>
+            </li>
+        </ul>
+    </nav>
+{% endif %}
