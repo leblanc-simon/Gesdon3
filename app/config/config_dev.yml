@@ -14,9 +14,19 @@ web_profiler:
 monolog:
     handlers:
         main:
-            type:   stream
-            path:   "%kernel.logs_dir%/%kernel.environment%.log"
-            level:  debug
+            type:       rotating_file
+            max_files:  3
+            path:       "%kernel.logs_dir%/%kernel.environment%.log"
+            level:      debug
+
+        # Gesdon specifical log : save log into dedicated file
+        gesdon:
+            type:           rotating_file
+            max_files:      30
+            path:           %kernel.logs_dir%/%kernel.environment%.gesdon.log
+            level:          debug
+            channels:       gesdon
+
         console:
             type:   console
             bubble: false
@@ -24,6 +34,7 @@ monolog:
                 VERBOSITY_VERBOSE: INFO
                 VERBOSITY_VERY_VERBOSE: DEBUG
             channels: ["!doctrine"]
+
         console_very_verbose:
             type:   console
             bubble: false
@@ -32,17 +43,9 @@ monolog:
                 VERBOSITY_VERY_VERBOSE: NOTICE
                 VERBOSITY_DEBUG: DEBUG
             channels: ["doctrine"]
-        # uncomment to get logging in your browser
-        # you may have to allow bigger header sizes in your Web server configuration
-        #firephp:
-        #    type:   firephp
-        #    level:  info
-        #chromephp:
-        #    type:   chromephp
-        #    level:  info
 
 assetic:
     use_controller: true
 
-#swiftmailer:
-#    delivery_address: me@example.com
+swiftmailer:
+    delivery_address: %delivery_address%

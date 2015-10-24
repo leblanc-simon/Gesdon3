@@ -1,27 +1,88 @@
 imports:
     - { resource: config.yml }
 
-#framework:
-#    validation:
-#        cache: validator.mapping.cache.apc
-#    serializer:
-#        cache: serializer.mapping.cache.apc
-
-#doctrine:
-#    orm:
-#        metadata_cache_driver: apc
-#        result_cache_driver: apc
-#        query_cache_driver: apc
-
 monolog:
     handlers:
+        # Main log
         main:
-            type:         fingers_crossed
-            action_level: error
-            handler:      nested
-        nested:
-            type:  stream
-            path:  "%kernel.logs_dir%/%kernel.environment%.log"
-            level: debug
+            type:           rotating_file
+            max_files:      3
+            path:           %kernel.logs_dir%/%kernel.environment%.all.log
+            level:          info
+
+        # Gesdon specifical log : save log into dedicated file
+        gesdon:
+            type:           rotating_file
+            max_files:      30
+            path:           %kernel.logs_dir%/%kernel.environment%.gesdon.log
+            level:          info
+            channels:       gesdon
+
+        # Connection : save log into dedicated file
+        login:
+            type:           rotating_file
+            max_files:      15
+            path:           %kernel.logs_dir%/%kernel.environment%.auth.log
+            level:          info
+            channels:       security
+
+        # No critical error : save log into dedicated file
+        main_error:
+            type:           fingers_crossed
+            action_level:   error
+            handler:        streamed_error
+        streamed_error:
+            type:           rotating_file
+            max_files:      15
+            path:           %kernel.logs_dir%/%kernel.environment%.error.log
+            level:          info
+
+        # Critical error : save log into dedicated file and send it by mail
+        main_critical:
+            type:           fingers_crossed
+            action_level:   critical
+            handler:        grouped_critical
+        grouped_critical:
+            type:           group
+            members:        [streamed_critical, buffered_critical]
+        streamed_critical:
+            type:           rotating_file
+            max_files:      15
+            path:           %kernel.logs_dir%/%kernel.environment%.critical.log
+            level:          info
+        buffered_critical:
+            type:           buffer
+            handler:        swift_critical
+        swift_critical:
+            type:           swift_mailer
+            mailer:         swiftmailer.mailer.instant_mailer
+            from_email:     %email_admin%
+            to_email:       %email_admin%
+            subject:        "[Gesdon] Critical error !"
+            level:          info
+
         console:
-            type:  console
+            type: console
+
+swiftmailer:
+    default_mailer: spool_mailer
+    mailers:
+        # Send mail instantly
+        instant_mailer:
+            transport: "%mailer_transport%"
+            host:      "%mailer_host%"
+            username:  "%mailer_user%"
+            password:  "%mailer_password%"
+            spool:     { type: memory }
+            delivery_address: %delivery_address%
+
+        # Save mail into spooler
+        spool_mailer:
+            transport: "%mailer_transport%"
+            host:      "%mailer_host%"
+            username:  "%mailer_user%"
+            password:  "%mailer_password%"
+            spool:
+                type: file
+                path: "%kernel.root_dir%/Resources/swiftmailer/spool"
+            delivery_address: %delivery_address%

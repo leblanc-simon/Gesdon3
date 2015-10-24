@@ -21,3 +21,5 @@ services:
             - @logger
             - @repository.donation
             - @manager.configuration
+        tags:
+            - { name: monolog.logger, channel: gesdon }
