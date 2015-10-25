@@ -154,6 +154,14 @@ class ApiDonation
             $this->entity_manager->persist($donation);
 
             $this->entity_manager->flush();
+
+            $this->logger->info('add a new donation', [
+                'contributor_id' => $contributor->getId(),
+                'contributor' => $contributor->__toString(),
+                'address' => $address->getId(),
+                'donation' => $donation->getId(),
+                'amount' => $donation->getAmount(),
+            ]);
         } catch (\Exception $e) {
             $this->logger->error($e->getMessage());
             throw $e;
