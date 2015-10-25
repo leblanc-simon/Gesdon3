@@ -20,12 +20,26 @@ services:
         factory_method: getRepository
         arguments: [ AppBundle:Contributor ]
 
+    repository.contributor_type:
+        class: Doctrine\ORM\EntityRepository
+        public: true
+        factory_service: doctrine
+        factory_method: getRepository
+        arguments: [ AppBundle:ContributorType ]
+
     repository.donation:
         class: AppBundle\Repository\DonationRepository
         public: true
         factory_service: doctrine
         factory_method: getRepository
         arguments: [ AppBundle:Donation ]
+
+    repository.payment_type:
+        class: Doctrine\ORM\EntityRepository
+        public: true
+        factory_service: doctrine
+        factory_method: getRepository
+        arguments: [ AppBundle:PaymentType ]
 
     repository.receipt:
         class: Doctrine\ORM\EntityRepository

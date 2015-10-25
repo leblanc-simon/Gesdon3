@@ -16,6 +16,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class ContributorType
 {
+    const DEFAULT_TYPE = 'personal';
+
     /**
      * @var int
      * @ORM\Id

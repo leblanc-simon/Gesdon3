@@ -23,3 +23,16 @@ services:
             - @manager.configuration
         tags:
             - { name: monolog.logger, channel: gesdon }
+
+    manager.api_donation:
+        class: AppBundle\Manager\ApiDonation
+        arguments:
+            - @doctrine.orm.entity_manager
+            - @repository.donation
+            - @repository.contributor
+            - @repository.address
+            - @repository.contributor_type
+            - @repository.payment_type
+            - @logger
+        tags:
+            - { name: monolog.logger, channel: gesdon }

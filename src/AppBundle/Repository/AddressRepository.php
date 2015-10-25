@@ -7,6 +7,11 @@ use Doctrine\ORM\EntityRepository;
 
 class AddressRepository extends EntityRepository
 {
+    /**
+     * @param Address $address
+     * @return Address|null
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
     public function findOneIdentical(Address $address)
     {
         $qb = $this->createQueryBuilder('a');
@@ -37,10 +42,13 @@ class AddressRepository extends EntityRepository
         if (true === empty($address->getAdditional())) {
             $or_additional = $qb->expr()->orX();
             $or_additional
-                ->add($qb->expr()->eq('a.additional', ''))
+                ->add($qb->expr()->eq('a.additional', ':additional'))
                 ->add($qb->expr()->isNull('a.additional'))
             ;
-            $qb->andWhere($or_additional);
+            $qb
+                ->andWhere($or_additional)
+                ->setParameter('additional', '')
+            ;
         } else {
             $qb
                 ->andWhere('a.additional = :additional')

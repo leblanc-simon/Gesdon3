@@ -18,7 +18,25 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ContributorController extends Controller
 {
     /**
-     * @Route("/{email}", name="api_contributor_by_email")
+     * @Route(
+     *      "/{email}",
+     *      name="api_contributor_by_email",
+     *      methods={"get"}
+     * )
+     *
+     * @api {get} /api/contributor/:email Request contributor information
+     * @apiName GetContributor
+     * @apiGroup Contributor
+     * @apiVersion 1.0.0
+     *
+     * @apiParam {String} email The email's contributor
+     *
+     * @apiSuccess (200) {Integer} id Id of contributor
+     * @apiSuccess (200) {String} email Email of contributor
+     * @apiSuccess (200) {String} firstname Firstname of contributor
+     * @apiSuccess (200) {String} lastname Lastname of contributor
+     * @apiSuccess (200) {Integer} contributor_type Id of the contributor type
+     * @apiError (404) null Contributor not found
      */
     public function getByMailAction(Contributor $contributor)
     {
@@ -32,7 +50,26 @@ class ContributorController extends Controller
     }
 
     /**
-     * @Route("/{email}/last-address", name="api_contributor_last_address_by_email")
+     * @Route(
+     *      "/{email}/last-address",
+     *      name="api_contributor_last_address_by_email",
+     *      methods={"get"}
+     * )
+     *
+     * @api {get} /api/contributor/:email/last-address Request the last address of contributor
+     * @apiName GetContributorLastAddress
+     * @apiGroup Contributor
+     * @apiVersion 1.0.0
+     *
+     * @apiParam {String} email The email's contributor
+     *
+     * @apiSuccess (200) {Integer} id Id of address
+     * @apiSuccess (200) {String} street Street of the contributor
+     * @apiSuccess (200) {String} additional Addtional street of the contributor
+     * @apiSuccess (200) {String} zip_code Zip Code of the contributor
+     * @apiSuccess (200) {String} city City of the contributor
+     * @apiSuccess (200) {String} country ISO code of the country
+     * @apiError (404) null Address or Contributor not found
      */
     public function getLastAddressByMailAction(Contributor $contributor)
     {
