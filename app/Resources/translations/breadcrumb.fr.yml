@@ -17,3 +17,7 @@ parameters:
         list: Types de donateur
         edit: Édition
         delete: Suppression
+    payment_type:
+        list: Types de paiement
+        edit: Édition
+        delete: Suppression

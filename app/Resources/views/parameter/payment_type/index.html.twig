@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'table' %}
+
+{% block body %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('homepage') }}">{{ 'homepage'|trans({}, 'breadcrumb') }}</a></li>
+        <li><a href="{{ path('parameters') }}">{{ 'parameters.main'|trans({}, 'breadcrumb') }}</a></li>
+        <li class="active">{{ 'parameters.payment_type.list'|trans({}, 'breadcrumb') }}</li>
+    </ol>
+
+    <h1>{{ 'payment_type.title'|trans }}</h1>
+
+    <div class="row">
+        <div class="col-md-12">
+            <a href="{{ path('parameters_payment_types_add') }}" class="btn btn-primary">
+                <i class="icon-plus"></i>
+                {{ 'add.payment_type'|trans({}, 'action') }}
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            {% if payment_types|length > 0 %}
+                <table class="table table-bordered table-responsive">
+                    <thead>
+                        <tr>
+                            <th>{{ 'payment_type.slug'|trans }}</th>
+                            <th>{{ 'payment_type.name'|trans }}</th>
+                            <th>{{ 'title'|trans({}, 'action') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for payment_type in payment_types %}
+                            <tr>
+                                <td>{{ payment_type.slug }}</td>
+                                <td>{{ payment_type.name }}</td>
+                                <td>
+                                    <a href="{{ path('parameters_payment_types_edit', {'id': payment_type.id}) }}" class="btn btn-warning">
+                                        <i class="icon-edit"></i>
+                                        {{ 'edit'|trans({}, 'action') }}
+                                    </a>
+                                    <a href="{{ path('parameters_payment_types_delete', {'id': payment_type.id}) }}" class="btn btn-danger">
+                                        <i class="icon-trash"></i>
+                                        {{ 'delete'|trans({}, 'action') }}
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="alert alert-warning">
+                    {{ 'error.payment_type.empty'|trans }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

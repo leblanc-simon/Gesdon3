@@ -33,6 +33,11 @@ contributor_type:
     slug: Clé unique
     name: Intitulé
 
+payment_type:
+    title: Types de paiement
+    slug: Clé unique
+    name: Intitulé
+
 error:
     donation:
         empty: Aucun don actuellement

@@ -38,3 +38,13 @@ services:
         class: AppBundle\Form\ContributorTypeDeleteType
         tags:
             - { name: form.type, alias: contributor_type_delete }
+
+    form.type.payment_type:
+        class: AppBundle\Form\PaymentTypeType
+        tags:
+            - { name: form.type, alias: payment_type }
+
+    form.type.payment_type.delete:
+        class: AppBundle\Form\PaymentTypeDeleteType
+        tags:
+            - { name: form.type, alias: payment_type_delete }

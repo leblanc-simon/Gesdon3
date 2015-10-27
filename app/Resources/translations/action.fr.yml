@@ -3,6 +3,7 @@ title: Actions
 add:
     donation: Ajouter un don
     contributor_type: Ajouter un type de donateur
+    payment_type: Ajouter un type de paiement
 
 edit: Modifier
 show: Voir
