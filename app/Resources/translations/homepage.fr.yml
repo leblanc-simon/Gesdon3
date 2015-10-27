@@ -7,4 +7,4 @@ parameters:
     title: Paramètres
     configuration: Configuration
     payment_type: Type de paiement
-    contributor_type: Type de contributeur
+    contributor_type: Type de donateur

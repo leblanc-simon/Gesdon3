@@ -28,3 +28,13 @@ services:
         class: AppBundle\Form\ConfigurationType
         tags:
             - { name: form.type, alias: configuration }
+
+    form.type.contributor_type:
+        class: AppBundle\Form\ContributorTypeType
+        tags:
+            - { name: form.type, alias: contributor_type }
+
+    form.type.contributor_type.delete:
+        class: AppBundle\Form\ContributorTypeDeleteType
+        tags:
+            - { name: form.type, alias: contributor_type_delete }

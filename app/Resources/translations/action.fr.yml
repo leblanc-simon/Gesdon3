@@ -2,6 +2,7 @@ title: Actions
 
 add:
     donation: Ajouter un don
+    contributor_type: Ajouter un type de donateur
 
 edit: Modifier
 show: Voir

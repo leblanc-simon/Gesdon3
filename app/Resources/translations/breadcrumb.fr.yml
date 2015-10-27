@@ -13,3 +13,7 @@ contributor:
 parameters:
     main: Paramètres
     configuration: Configuration
+    contributor_type:
+        list: Types de donateur
+        edit: Édition
+        delete: Suppression

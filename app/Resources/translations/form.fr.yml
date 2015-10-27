@@ -23,6 +23,10 @@ donation:
     fee: Frais
     created_at: Date du don
 
+contributor_type:
+    slug: Clé unique
+    name: Intitulé
+
 button:
     save: Enregistrer
     delete: Supprimer

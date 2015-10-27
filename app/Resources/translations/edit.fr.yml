@@ -7,6 +7,11 @@ edit:
 delete:
     donation: Suppression du don "%name%"
     donation_explain: Êtes-vous sûr de vouloir supprimer le don "%name%" d'un montant de %amount% € ?
+    contributor_type: Suppression du type de donateur "%name%"
+    contributor_type_explain: Êtes-vous sûr de vouloir supprimer le type de donateur "%name%" ?
 
 parameters:
     configuration: Configuration
+
+contributor_type:
+    edit: Édition d'un type de donateur

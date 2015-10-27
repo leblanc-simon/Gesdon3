@@ -28,6 +28,11 @@ receipt:
     period: Période
     sended_at: Envoyé le
 
+contributor_type:
+    title: Types de donateur
+    slug: Clé unique
+    name: Intitulé
+
 error:
     donation:
         empty: Aucun don actuellement
@@ -35,3 +40,5 @@ error:
         empty: Aucun contributeur actuellement
     receipt:
         empty: Aucun reçu actuellement
+    contributor_type:
+        empty: Aucun type de donateur actuellement

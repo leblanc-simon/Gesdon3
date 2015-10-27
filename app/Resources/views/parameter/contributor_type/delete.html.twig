@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'edit' %}
+
+{% block body %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('homepage') }}">{{ 'homepage'|trans({}, 'breadcrumb') }}</a></li>
+        <li><a href="{{ path('parameters') }}">{{ 'parameters.main'|trans({}, 'breadcrumb') }}</a></li>
+        <li><a href="{{ path('parameters_contributor_types') }}">{{ 'parameters.contributor_type.list'|trans({}, 'breadcrumb') }}</a></li>
+        <li class="active">{{ 'parameters.contributor_type.delete'|trans({}, 'breadcrumb') }}</li>
+    </ol>
+
+    <h1>{{ 'delete.contributor_type'|trans({'%name%': contributor_type.name}) }}</h1>
+
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-danger">
+                <i class="icon-alert"></i>
+                {{ 'delete.contributor_type_explain'|trans({'%name%': contributor_type.name}) }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <a href="{{ path('parameters_contributor_types') }}" class="btn btn-success">
+                {{ 'button.return.list'|trans({}, 'form') }}
+            </a>
+            {{ form_widget(form) }}
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
