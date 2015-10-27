@@ -18,3 +18,13 @@ services:
         class: AppBundle\Form\DonationDeleteType
         tags:
             - { name: form.type, alias: donation_delete }
+
+    form.type.configuration_item:
+        class: AppBundle\Form\ConfigurationItemType
+        tags:
+            - { name: form.type, alias: configuration_item }
+
+    form.type.configuration:
+        class: AppBundle\Form\ConfigurationType
+        tags:
+            - { name: form.type, alias: configuration }

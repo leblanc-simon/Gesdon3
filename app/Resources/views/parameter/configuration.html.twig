@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'edit' %}
+
+{% block body %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('homepage') }}">{{ 'homepage'|trans({}, 'breadcrumb') }}</a></li>
+        <li><a href="{{ path('parameters') }}">{{ 'parameters.main'|trans({}, 'breadcrumb') }}</a></li>
+        <li class="active">{{ 'parameters.configuration'|trans({}, 'breadcrumb') }}</li>
+    </ol>
+
+    <h1>{{ 'parameters.configuration'|trans }}</h1>
+
+    {{ form_start(form) }}
+        <div class="row">
+        {% for configuration in form.configurations %}
+            <div class="col-md-6 col-xs-12">
+                {{ form_row(configuration.value, {'label': configuration.name.vars.value}) }}
+            </div>
+        {% endfor %}
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                {{ form_row(form.submit) }}
+            </div>
+        </div>
+        <div class="hide">{{ form_rest(form) }}</div>
+    {{ form_end(form) }}
+{% endblock %}

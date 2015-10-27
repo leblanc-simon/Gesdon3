@@ -13,6 +13,7 @@ services:
         arguments:
             - @doctrine.orm.entity_manager
             - @repository.configuration
+            - @session.flash_bag
 
     manager.receipt:
         class: AppBundle\Manager\Receipt

@@ -4,7 +4,7 @@
 {% block body %}
     <ol class="breadcrumb">
         <li><a href="{{ path('homepage') }}">{{ 'homepage'|trans({}, 'breadcrumb') }}</a></li>
-        <li class="active">{{ 'parameters'|trans({}, 'breadcrumb') }}</li>
+        <li class="active">{{ 'parameters.main'|trans({}, 'breadcrumb') }}</li>
     </ol>
 
     <h1>{{ 'parameters.title'|trans }}</h1>
@@ -12,7 +12,7 @@
 
     <div class="row homepage">
         <div class="col-md-4 col-xs-12">
-            <a href="{{ path('donations') }}">
+            <a href="{{ path('parameters_configuration') }}">
                 <i class="icon-parameter"></i>
                 {{ 'parameters.configuration'|trans }}
             </a>

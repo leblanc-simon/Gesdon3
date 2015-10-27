@@ -10,4 +10,6 @@ contributor:
     list: Donateurs
     show: Détail
 
-parameters: Paramètres
+parameters:
+    main: Paramètres
+    configuration: Configuration

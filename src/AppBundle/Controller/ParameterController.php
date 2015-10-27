@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -19,5 +20,28 @@ class ParameterController extends Controller
     public function indexAction()
     {
         return $this->render('parameter/index.html.twig');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/configuration", name="parameters_configuration")
+     */
+    public function configurationAction(Request $request)
+    {
+        $datas = [
+            'configurations' => $this->get('manager.configuration')->getAll()
+        ];
+        $form = $this->createForm('configuration', $datas);
+        $form->handleRequest($request);
+
+        if ($form->isValid() === true) {
+            $this->get('manager.configuration')->saveAll($datas['configurations']);
+            return $this->redirectToRoute('parameters');
+        }
+
+        return $this->render('parameter/configuration.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }
