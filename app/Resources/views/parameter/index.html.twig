@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'homepage' %}
+
+{% block body %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('homepage') }}">{{ 'homepage'|trans({}, 'breadcrumb') }}</a></li>
+        <li class="active">{{ 'parameters'|trans({}, 'breadcrumb') }}</li>
+    </ol>
+
+    <h1>{{ 'parameters.title'|trans }}</h1>
+
+
+    <div class="row homepage">
+        <div class="col-md-4 col-xs-12">
+            <a href="{{ path('donations') }}">
+                <i class="icon-parameter"></i>
+                {{ 'parameters.configuration'|trans }}
+            </a>
+        </div>
+        <div class="col-md-4 col-xs-12">
+            <a href="{{ path('contributors') }}">
+                <i class="icon-bank"></i>
+                {{ 'parameters.payment_type'|trans }}
+            </a>
+        </div>
+        <div class="col-md-4 col-xs-12">
+            <a href="">
+                <i class="icon-user"></i>
+                {{ 'parameters.contributor_type'|trans }}
+            </a>
+        </div>
+    </div>
+{% endblock %}

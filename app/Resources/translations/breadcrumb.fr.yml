@@ -9,3 +9,5 @@ donation:
 contributor:
     list: Donateurs
     show: Détail
+
+parameters: Paramètres
