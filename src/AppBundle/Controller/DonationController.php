@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 class DonationController extends Controller
 {
     /**
-     * @Route("/{page}", name="donations", defaults={"page" = 1})
+     * @Route("/{page}", name="donations", defaults={"page" = 1}, requirements={"page" = "\d+"})
      */
     public function indexAction($page)
     {
