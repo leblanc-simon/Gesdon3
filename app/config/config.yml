@@ -99,3 +99,12 @@ services:
         class: Twig_Extensions_Extension_Intl
         tags:
             - { name: twig.extension }
+
+# KnpSnappy Configuration
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     %wkhtmltopdf_binary%
+        options:    []
+    image:
+        enabled:    false

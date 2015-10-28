@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        {% include 'receipt/fonts.html.twig' %}
+        <style>
+            .pdf-footer {
+                text-align: center;
+                font-size: 55%;
+            }
+        </style>
+    </head>
+    <body>
+        <p class="pdf-footer">
+            {{ receiver_name }} - {{ receiver_subject }}<br />
+            sous le n° {{ receiver_number }} - n° Siret : {{ receiver_siret }}<br />
+            Organisme bénéficiant de la franchise des impôts commerciaux au
+            titre de l'article 261-7-1°-b du Code Général des Impôts
+        </p>
+    </body>
+</html>

@@ -25,3 +25,6 @@ parameters:
 
     # Usup email address : if not null, send all mails to this email address
     delivery_address: ~
+
+    # Path to the wkhtmltopdf binary
+    wkhtmltopdf_binary: '%kernel.root_dir%/../vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64'

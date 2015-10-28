@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        {% include 'receipt/fonts.html.twig' %}
+        <style>
+            body {
+                padding: 0.4rem 1rem;
+                font-size: 0.9rem;
+            }
+            .checkbox:before {
+                border: 1px solid #666;
+            }
+            .italic {
+                font-style: italic;
+            }
+            .space-top {
+                margin-top: 2rem;
+            }
+            #license {
+                color: #dddddd;
+                -webkit-transform: rotate(270deg);
+                z-index: 200;
+                position: absolute;
+                top: 12rem;
+                right: -9rem;
+                font-size: 80%;
+            }
+            .title {
+                background-color: #ccc;
+                text-align: center;
+                font-style: italic;
+                font-weight: bold;
+                padding: 0.6rem;
+                margin: 0.6rem 0;
+                font-size: 1.4rem;
+            }
+            .row {
+                margin-bottom: 0.6rem;
+                clear: both;
+                width: 100%;
+                position: relative;
+            }
+            .label {
+                position: absolute;
+                font-weight: bold;
+            }
+            .label:after {
+                content: ' :';
+            }
+            .value {
+                margin-left: 8rem;
+            }
+            .big-label + .value {
+                margin-left: 18rem;
+                text-decoration: underline;
+            }
+            .amount {
+                text-align: center;
+                font-weight: bold;
+                text-decoration: underline;
+                font-size: 1.8rem;
+            }
+            .icon-null:before {
+                content: '\00a0';
+            }
+            .spacing {
+                margin-left: 2rem;
+            }
+            .subtitle {
+                text-decoration: underline;
+                margin-bottom: 0.6rem;
+            }
+            .subtitle:after {
+                content: ' :';
+            }
+        </style>
+    </head>
+    <body>
+        {#Licence de l'image#}
+        <div id="license">Illustration : Copyleft L.L. de Mars - Licence Art Libre</div>
+
+        {#Bénéficiaire : l'association#}
+        <div class="title">Bénéficiaire des versements</div>
+        <div class="row">
+            <div class="label">Nom</div>
+            <div class="value">{{ receiver_name }}</div>
+        </div>
+        <div class="row">
+            <div class="label">Adresse</div>
+            <div class="value">{{ receiver_address }}</div>
+        </div>
+        <div class="row">
+            <div class="label">Objet</div>
+            <div class="value italic">{{ receiver_subject }}</div>
+        </div>
+        <div class="row space-top">
+            <i class="icon-ok checkbox"></i>
+            Œuvre ou organisme d'intérêt général
+        </div>
+
+        {#Donateur#}
+        <div class="title">Donateur</div>
+        <div class="row">
+            <div class="label">Nom</div>
+            {% if receipt.company %}
+                <div class="value">{{ receipt.firstname }} {{ receipt.lastname }}</div>
+            {% else %}
+                <div class="value">{{ receipt.company }}</div>
+            {% endif %}
+        </div>
+        <div class="row">
+            <div class="label">Adresse</div>
+            <div class="value">
+                {{ receipt.street }}<br />
+                {% if receipt.additional %}{{ receipt.additional }}<br />{% endif %}
+                {{ receipt.zipCode }} {{ receipt.city }}
+            </div>
+        </div>
+
+        {#Montant du don#}
+        <div class="row space-top">
+            Le bénéficiaire reconnaît avoir reçu au titre des dons et versements ouvrant droit à réduction
+            d'impôt, la somme de :
+        </div>
+        <div class="row amount">
+            {{ receipt.amount|localizedcurrency('EUR') }}
+        </div>
+
+        <div class="row space-top">
+            <div class="label big-label">Somme en toutes lettres</div>
+            <div class="value">trente euros</div>
+        </div>
+        <div class="row">
+            <div class="label big-label">Date du versement ou du don</div>
+            <div class="value">{{ receipt.beginDate|localizeddate('long', 'none') }}</div>
+        </div>
+        <div class="row">
+            Le bénéficiaire certifie sur l'honneur que les dons et versements qu'il reçoit ouvrent droits à
+            la réduction d'impôt prévue à l'article :
+        </div>
+        <div class="row">
+            <i class="icon-ok checkbox"></i>
+            200 du CGI
+            <i class="icon-ok checkbox spacing"></i>
+            238 bis du CGI
+            <i class="icon-null checkbox spacing"></i>
+            885-0 V bis A du C
+        </div>
+
+        {#Modalité du don#}
+        <div class="row space-top">
+            <div class="subtitle">Forme du don</div>
+            <div class="subvalue">
+                <i class="icon-null checkbox"></i>
+                Acte authentique
+                <i class="icon-null checkbox spacing"></i>
+                Acte sous seing privé
+                <i class="icon-ok checkbox spacing"></i>
+                Déclaration de don manuel
+                <i class="icon-null checkbox spacing"></i>
+                Autre
+            </div>
+        </div>
+
+        <div class="row space-top">
+            <div class="subtitle">Nature du don</div>
+            <div class="subvalue">
+                <i class="icon-null checkbox"></i>
+                Numéraire
+                <i class="icon-null checkbox spacing"></i>
+                Titre de sociétés côtés
+                <i class="icon-ok checkbox spacing"></i>
+                Autre
+            </div>
+        </div>
+
+        <div class="row space-top">
+            <div class="subtitle">En cas de don en numéraire, mode de versement du don</div>
+            <div class="subvalue">
+                <i class="icon-null checkbox"></i>
+                Remise d'espèces
+                <i class="icon-null checkbox spacing"></i>
+                Chèque
+                <i class="icon-ok checkbox spacing"></i>
+                Virement, prélévement, carte bancaire
+            </div>
+        </div>
+    </body>
+</html>

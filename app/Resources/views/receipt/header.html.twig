@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        {% include 'receipt/fonts.html.twig' %}
+        <style>
+            body {
+                padding: 0.5rem 1rem;
+            }
+            #pdf-cerfa {
+                position: absolute;
+                top: 0.5rem;
+                left: 1.5rem;
+                display: inline-block;
+                background-color: #eee;
+                padding: 0.5rem;
+                width: 8rem;
+                text-align: center;
+                line-height: 2rem;
+                float: left;
+            }
+
+            #pdf-title {
+                text-align: center;
+                padding-bottom: 1.6rem;
+            }
+
+            h1, h2, h3 {
+                margin: 0;
+                padding: 0;
+            }
+
+            h1 {
+                font-size: 1.3rem;
+            }
+
+            h2 {
+                font-weight: normal;
+                font-size: 1.1rem;
+            }
+
+            h3 {
+                font-weight: normal;
+                font-size: 0.6rem;
+            }
+
+            #pdf-number {
+                position: absolute;
+                top: 0.5rem;
+                right: 1.5rem;
+                display: inline-block;
+                background-color: #eee;
+                padding: 0.5rem;
+                width: 8rem;
+                text-align: center;
+                line-height: 2rem;
+                float: right;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="pdf-logo">
+
+        </div>
+        <div id="pdf-cerfa">
+            D'après CERFA 11580*03
+        </div>
+        <div id="pdf-title">
+            <h1>Reçu au titre des dons</h1>
+            <h2>à certains organismes d'intérêt général</h2>
+            <h3>Articles 200, 238 bis et 885-0 V bis A du Code Général des Impôts</h3>
+        </div>
+        <div id="pdf-number">
+            Numéro d'ordre<br />{{ receipt.legalNumber }}
+        </div>
+    </body>
+</html>
