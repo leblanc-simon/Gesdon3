@@ -192,6 +192,13 @@ class Receipt
     protected $contributor;
 
     /**
+     * @ORM\ManyToOne(inversedBy="receipts", targetEntity="AppBundle\Entity\PaymentType")
+     * @ORM\JoinColumn(referencedColumnName="id", name="payment_type_id", nullable=false)
+     * @Assert\NotNull()
+     */
+    protected $payment_type;
+
+    /**
      * @var ArrayCollection
      * @ORM\OneToMany(mappedBy="receipt", targetEntity="AppBundle\Entity\Donation", cascade={"persist"})
      */
@@ -415,6 +422,16 @@ class Receipt
     public function getContributor()
     {
         return $this->contributor;
+    }
+
+
+    /**
+     * Get the value of payment_type
+     * @return PaymentType
+     */
+    public function getPaymentType()
+    {
+        return $this->payment_type;
     }
 
 
@@ -676,6 +693,18 @@ class Receipt
     public function setContributor(Contributor $contributor)
     {
         $this->contributor = $contributor;
+        return $this;
+    }
+
+
+    /**
+     * Set the value of payment_type
+     * @param PaymentType $payment_type
+     * @return self
+     */
+    public function setPaymentType(PaymentType $payment_type)
+    {
+        $this->payment_type = $payment_type;
         return $this;
     }
 

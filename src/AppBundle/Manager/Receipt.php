@@ -4,6 +4,7 @@ namespace AppBundle\Manager;
 
 use AppBundle\Entity\Address;
 use AppBundle\Entity\Contributor;
+use AppBundle\Entity\PaymentType;
 use AppBundle\Repository\DonationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use AppBundle\Entity\Receipt as ReceiptEntity;
@@ -65,6 +66,7 @@ class Receipt
             $amount += $donation->getAmount();
             $contributor = $donation->getContributor();
             $via = $donation->getVia();
+            $payment_type = $donation->getPaymentType();
 
             $donation->setConverted(true);
             $this->entity_manager->persist($donation);
@@ -83,7 +85,17 @@ class Receipt
             return false;
         }
 
-        $this->buildReceipt($receipt, $contributor, $address, $amount, $begin, $end, (bool)count($donations), $via);
+        $this->buildReceipt(
+            $receipt,
+            $contributor,
+            $address,
+            $amount,
+            $begin,
+            $end,
+            (bool)count($donations),
+            $via,
+            $payment_type
+        );
 
         $this->entity_manager->flush();
         $this->entity_manager->commit();
@@ -102,6 +114,7 @@ class Receipt
      * @param \DateTime $end
      * @param bool $recurring
      * @param string $via
+     * @param PaymentType $payment_type
      */
     private function buildReceipt(
         ReceiptEntity $receipt,
@@ -111,7 +124,8 @@ class Receipt
         \DateTime $begin,
         \DateTime $end,
         $recurring,
-        $via
+        $via,
+        PaymentType $payment_type
     ) {
         $next_legal_number = (int)$this->configuration->get('next_legal_number');
 
@@ -134,6 +148,7 @@ class Receipt
             ->setVia($via)
             ->setCreatedAt(new \DateTime())
             ->setContributor($contributor)
+            ->setPaymentType($payment_type)
         ;
 
         $this->entity_manager->persist($receipt);

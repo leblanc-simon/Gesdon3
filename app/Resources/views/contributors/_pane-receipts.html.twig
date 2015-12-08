@@ -23,7 +23,7 @@
                                 }) }}</td>
                             <td>{% if receipt.sendedAt is not null %}{{ receipt.sendedAt|localizeddate('medium', 'none', locale) }}{% endif %}</td>
                             <td>
-                                <a href="" class="btn btn-success">
+                                <a href="{{ path('contributor_pdf', {'id': receipt.id}) }}" class="btn btn-success">
                                     <i class="icon-file-pdf"></i>
                                     {{ 'show'|trans({}, 'action') }}
                                 </a>

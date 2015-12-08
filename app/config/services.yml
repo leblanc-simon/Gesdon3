@@ -5,6 +5,7 @@ imports:
     - { resource: services/forms.yml }
     - { resource: services/managers.yml }
     - { resource: services/repositories.yml }
+    - { resource: services/twig.yml }
 
 services:
     paginator:

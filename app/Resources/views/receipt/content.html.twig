@@ -129,7 +129,7 @@
 
         <div class="row space-top">
             <div class="label big-label">Somme en toutes lettres</div>
-            <div class="value">trente euros</div>
+            <div class="value">{{ receipt.amount|number_to_string }} euros</div>
         </div>
         <div class="row">
             <div class="label big-label">Date du versement ou du don</div>
@@ -178,11 +178,11 @@
         <div class="row space-top">
             <div class="subtitle">En cas de don en numéraire, mode de versement du don</div>
             <div class="subvalue">
-                <i class="icon-null checkbox"></i>
+                <i class="{% if receipt.paymentType.slug == 'cash' %}icon-ok{% else %}icon-null{% endif %} checkbox"></i>
                 Remise d'espèces
-                <i class="icon-null checkbox spacing"></i>
+                <i class="{% if receipt.paymentType.slug == 'check' %}icon-ok{% else %}icon-null{% endif %} checkbox spacing"></i>
                 Chèque
-                <i class="icon-ok checkbox spacing"></i>
+                <i class="{% if receipt.paymentType.slug != 'cash' and receipt.paymentType.slug != 'check' %}icon-ok{% else %}icon-null{% endif %} checkbox spacing"></i>
                 Virement, prélévement, carte bancaire
             </div>
         </div>

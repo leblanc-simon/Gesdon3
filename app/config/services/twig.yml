@@ -1,0 +1,6 @@
+services:
+    app.spell_number_extension:
+        class: AppBundle\Twig\SpellNumberExtension
+        public: false
+        tags:
+            - { name: twig.extension }

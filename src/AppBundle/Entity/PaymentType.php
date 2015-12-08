@@ -49,11 +49,18 @@ class PaymentType
     protected $donations;
 
     /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(mappedBy="payment_type", targetEntity="AppBundle\Entity\Receipt")
+     */
+    protected $receipts;
+
+    /**
      * Constructor of the PaymentType class
      */
     public function __construct()
     {
         $this->donations = new ArrayCollection();
+        $this->receipts = new ArrayCollection();
     }
 
     /**
@@ -102,6 +109,16 @@ class PaymentType
     public function getDonations()
     {
         return $this->donations;
+    }
+
+
+    /**
+     * Get the value of receipts
+     * @return Receipt[]
+     */
+    public function getReceipts()
+    {
+        return $this->receipts;
     }
 
 
@@ -178,6 +195,48 @@ class PaymentType
         if ($this->donations->contains($donation) === true) {
             $this->donations->removeElement($donation);
             $donation->setPaymentType(null);
+        }
+        return $this;
+    }
+
+
+    /**
+     * Set the value of receipts
+     * @param  ArrayCollection     $receipts
+     * @return self
+     */
+    public function setReceipts(ArrayCollection $receipts)
+    {
+        $this->receipts = $receipts;
+        return $this;
+    }
+
+
+    /**
+     * Add a Receipt into PaymentType
+     * @param  Receipt     $receipt
+     * @return self
+     */
+    public function addReceipt(Receipt $receipt)
+    {
+        if ($this->receipts->contains($receipt) === false) {
+            $this->receipts->add($receipt);
+            $receipt->setPaymentType($this);
+        }
+        return $this;
+    }
+
+
+    /**
+     * Remove a Receipt into PaymentType
+     * @param  Receipt     $receipt
+     * @return self
+     */
+    public function removeReceipt(Receipt $receipt)
+    {
+        if ($this->receipts->contains($receipt) === true) {
+            $this->receipts->removeElement($receipt);
+            $receipt->setPaymentType(null);
         }
         return $this;
     }
