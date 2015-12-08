@@ -59,6 +59,7 @@ class Receipt
         $amount = 0;
         $contributor = null;
         $via = null;
+        $payment_type = null;
 
         $receipt = new ReceiptEntity();
 
@@ -76,6 +77,11 @@ class Receipt
 
         if (null === $contributor) {
             $this->logger->error('no contributor found for email', [$email, $begin, $end]);
+            return false;
+        }
+
+        if (null === $payment_type) {
+            $this->logger->error('no payment_type found for email', [$email, $begin, $end]);
             return false;
         }
 
