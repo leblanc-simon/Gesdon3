@@ -22,7 +22,7 @@ class Version20151027222700 extends AbstractMigration
         $this->addSql("INSERT INTO configuration (slug, name, value) VALUES ('receiver_address', 'Votre adresse', '')");
         $this->addSql("INSERT INTO configuration (slug, name, value) VALUES ('receiver_logo', 'URL de votre logo', '')");
         $this->addSql("INSERT INTO configuration (slug, name, value) VALUES ('receiver_subject', 'Objet de votre association', '')");
-        $this->addSql("INSERT INTO configuration (slug, name, value) VALUES ('receiver_notification', 'Objet de votre association', 'Association loi 1901 déclarée en sous-préfecture de [ville] le [date]')");
+        $this->addSql("INSERT INTO configuration (slug, name, value) VALUES ('receiver_notification', 'Déclaration de votre association', 'Association loi 1901 déclarée en sous-préfecture de [ville] le [date]')");
         $this->addSql("INSERT INTO configuration (slug, name, value) VALUES ('receiver_number', 'Numéro de déclaration de l''organisation', '')");
         $this->addSql("INSERT INTO configuration (slug, name, value) VALUES ('receiver_siret', 'Numéro de SIRET', '')");
     }
